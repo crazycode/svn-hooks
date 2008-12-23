@@ -13,6 +13,9 @@ class RuJira
   # check the message is match the issue_key
   # and assign to the user
   def check_right(username, issue_key, message)
+    if message.nil? || message.empty?
+      return false
+    end
     issue_id = getIssueNumber(message, issue_key)
     has_right(username, issue_id)
   end
