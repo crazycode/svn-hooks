@@ -10,14 +10,14 @@ class RuJira
     @jira.login(user, pass)
   end
 
-  # check the message is match the issue_key
+  # check the message is match the issue_key_regex
   # and assign to the user
-  def check_right(username, issue_key, message)
+  def check_right(username, issue_key_regex, message)
     if message.nil? || message.empty?
       return false
     end
-    issue_id = getIssueNumber(message, issue_key)
-    has_right(username, issue_id)
+    issue_id = getIssueNumber(message, issue_key_regex)
+    !issuue_id.nil? && has_right(username, issue_id)
   end
 
   def has_right(username, issue_id)
@@ -33,10 +33,10 @@ class RuJira
     end
   end
 
-  def getIssueNumber(message, key)
-    re = Regexp.new("#{key}-[0-9]+")
+  def getIssueNumber(message, keyreg)
+    re = Regexp.new("#{keyreg}-[0-9]+")
     if message =~ re
-      "#{$&}"
+      "#{$&}".upcase
     end
   end
 
