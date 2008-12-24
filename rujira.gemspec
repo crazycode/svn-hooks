@@ -3,7 +3,7 @@ require 'rubygems'
 spec = Gem::Specification.new do |s|
 
   s.name = 'rujira'
-  s.version = "0.0.2"
+  s.version = "0.1.0"
   s.platform = Gem::Platform::RUBY
   s.summary = "rujira is a pure-Ruby JIRA client library to check user's issue right."
   s.files = Dir.glob("lib/**/*").delete_if { |item| item.include?(".git") }

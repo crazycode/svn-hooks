@@ -1,4 +1,4 @@
 require 'rubygems'
 require 'test/unit'
-#require File.dirname(__FILE__) + '/../lib/rujira'
+require File.dirname(__FILE__) + '/../lib/rujira'
 

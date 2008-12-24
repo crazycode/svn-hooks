@@ -17,13 +17,16 @@ class RuJira
       return false
     end
     issue_id = getIssueNumber(message, issue_key_regex)
-    !issuue_id.nil? && has_right(username, issue_id)
+    if issue_id.nil?
+      return false
+    end
+    has_right(username, issue_id)
   end
 
   def has_right(username, issue_id)
     begin
       issue = @jira.getIssue(issue_id)
-      if issue.assignee == username
+      if issue.assignee == username && issue.status == '3'
         return true
       else
         return false
