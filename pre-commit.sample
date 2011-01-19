@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+require 'rubygems'
+require 'rujira'
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# new version
+
+# /etc/jira-config
+# -
+# url: http://192.168.0.3/jira
+# username: crazycode
+# password: ******
+require 'rubygems'
+require 'svn_jira_hook'
+
+# or JiraHook.setup(url, user, pass)
+
+JiraHook.check(ARGV)
