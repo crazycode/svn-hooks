@@ -3,10 +3,7 @@ This is a lib for access jira application, use jira4r interface.
 = Prerequisites =
 SOAP4R (http://dev.ctor.org/soap4r) is required.
 
-= Build =
-gem build rujira.gemspec
-
 = Installation
 
-sudo gem install rujira*.gem
+sudo gem install svn-jira-hook
 

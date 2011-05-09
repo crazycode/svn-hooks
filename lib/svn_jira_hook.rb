@@ -25,7 +25,7 @@ class JiraHook
     #commit_date = `#{svnlook} date #{repo_path} -t #{transaction}`
 
     if commit_log.nil? || commit_log.empty?
-      STDERR.puts("提交注释必须填写，而且需要包括分配给你的bug号!")
+      STDERR.puts("'#{commit_log}' doesn't exist as a issue on Jira")
       exit(1)
     end
 
@@ -33,7 +33,7 @@ class JiraHook
     jira.login('username', 'password')
 
     unless jira.check_right(commit_author, '[Ss][Bb]', commit_log)
-      STDERR.puts("提交注释中必须包括分配给你的bug号!\n例如： SB-10: 修改说明")
+      STDERR.puts("Doesn't exist as a issue on Jira!\n： SB-10: 修改说明")
       exit(1)
     end
 
