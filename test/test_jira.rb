@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + '/test_helper'
+require 'test_helper'
 
-class BaseTest < Test::Unit::TestCase
+class TestJira < Test::Unit::TestCase
   def test_simple
     assert_equal 1, 1
   end
@@ -24,14 +24,7 @@ class BaseTest < Test::Unit::TestCase
     assert_equal "SB-34234", getIssueNumber("hello sb-34234abcd", "[Ss][Bb]")
   end
 
-  def test_jira
-    jira = RuJira.new('http://192.168.0.3/jira')
-    jira.login('crazycode', 'pass')
-    assert !jira.check_right('crazycode', '[Ss][Bb]', 'Hello, world')
-    assert jira.check_right('crazycode', '[Ss][Bb]', 'SB-2: Hello, world')
-  end
-
-  private 
+  private
   def getIssueNumber(message, keyreg)
     re = Regexp.new("#{keyreg}-[0-9]+")
     if message =~ re

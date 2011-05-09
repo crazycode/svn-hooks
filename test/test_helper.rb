@@ -1,4 +1,5 @@
 require 'rubygems'
 require 'test/unit'
-require File.dirname(__FILE__) + '/../lib/svn_hook_tools'
+require 'svn_hook_tools'
+#require File.dirname(__FILE__) + '/../lib/svn_hook_tools'
 
