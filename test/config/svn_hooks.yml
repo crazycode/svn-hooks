@@ -1,0 +1,5 @@
+
+# Jira Default config
+jira_url: http://10.241.14.35:8880
+jira_username: jira_user
+jira_password: 1qaz2wsx

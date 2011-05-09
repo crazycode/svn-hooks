@@ -5,12 +5,12 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "svn-jira-hook"
+    gem.name = "svn-hook-tools"
     # gem.executables     = %W(svn-jira-hook)
     gem.summary = %Q{svn jira hook lib.}
     gem.description = %Q{svn jira hook ruby lib.}
     gem.email = "crazycode@gmail.com"
-    gem.homepage = "http://github.com/crazycode/svn-jira-hook"
+    gem.homepage = "http://github.com/crazycode/svn-hook-tools"
     gem.authors = ["crazycode"]
 
     gem.add_dependency "soap4r"
@@ -50,7 +50,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "check-taskr #{version}"
+  rdoc.title = "svn-hook-tools #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

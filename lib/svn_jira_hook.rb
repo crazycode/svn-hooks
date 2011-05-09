@@ -1,21 +1,23 @@
 # encoding: utf-8
 require "jira4r/jira_tool"
-
+require "yaml"
 
 class JiraHook
 
-  def initialize(base_url)
-    @jira = ::Jira4R::JiraTool.new(2, base_url)
+  def initialize(base_url = nil)
+    @jira = ::Jira4R::JiraTool.new(2, base_url) unless base_url.nil?
   end
 
   def login(user, pass)
     @jira.login(user, pass)
   end
 
-  def self.check(argv)
+
+  def self.check(argv, keyprefix, config = nil)
     repo_path = argv[0]
     transaction = argv[1]
     svnlook = 'svnlook'
+
 
     #commit_dirs_changed = `#{svnlook} dirs-changed #{repo_path} -t #{transaction}`
     #commit_changed = `#{svnlook} changed #{repo_path} -t #{transaction}`
@@ -25,15 +27,26 @@ class JiraHook
     #commit_date = `#{svnlook} date #{repo_path} -t #{transaction}`
 
     if commit_log.nil? || commit_log.empty?
-      STDERR.puts("提交注释必须填写，而且需要包括分配给你的bug号!")
+      STDERR.puts("'#{commit_log}' doesn't exist as a issue on Jira")
       exit(1)
     end
 
-    jira = JiraHook.new('http://192.168.0.3/jira')
-    jira.login('username', 'password')
+    check(commit_author, commit_log, keyprefix, config)
+  end
 
-    unless jira.check_right(commit_author, '[Ss][Bb]', commit_log)
-      STDERR.puts("提交注释中必须包括分配给你的bug号!\n例如： SB-10: 修改说明")
+  def self.check(commit_author, commit_log, keyprefix, config = nil)
+    if config
+      jira_configuration = config
+    else
+      # TODO die if configuration file is missing
+      jira_configuration = configuration()
+    end
+
+    jira = JiraHook.new(jira_configuration['jira_url'])
+    jira.login(jira_configuration['jira_username'], jira_configuration['jira_password'])
+
+    unless jira.check_right(commit_author, keyprefix, commit_log)
+      STDERR.puts("Doesn't exist as a issue on Jira!\n： #{keyprefix}-10: 修改说明")
       exit(1)
     end
 
@@ -45,7 +58,7 @@ class JiraHook
     if message.nil? || message.empty?
       return false
     end
-    issue_id = getIssueNumber(message, issue_key_regex)
+    issue_id = get_issue_number(message, issue_key_regex)
     if issue_id.nil?
       return false
     end
@@ -65,11 +78,27 @@ class JiraHook
     end
   end
 
-  def getIssueNumber(message, keyreg)
-    re = Regexp.new("#{keyreg}-[0-9]+")
+  def get_issue_number(message, keyprefix)
+    # key="ab" => key=[Aa][Bb]
+    keyreg = []
+    keyprefix.each_char do |c|
+      keyreg << "[#{c.upcase}#{c.downcase}]"
+    end
+
+    re = Regexp.new("#{keyreg.join("")}-[0-9]+")
     if message =~ re
       "#{$&}".upcase
     end
+  end
+
+  def self.configuration
+    if defined?(SVN_HOOKS_CONFIG_PATH)
+      config_file = SVN_HOOKS_CONFIG_PATH
+    else
+      config_file = '/etc/svn_hooks.yml'
+    end
+
+    YAML::load(IO.read(config_file))
   end
 
 end
