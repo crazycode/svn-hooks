@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README",
     "Rakefile",
+    "VERSION",
     "lib/jira4r/jira4r.rb",
     "lib/jira4r/jira_tool.rb",
     "lib/jira4r/v2/JiraSoapServiceDriver.rb",
@@ -27,9 +28,13 @@ Gem::Specification.new do |s|
     "lib/jira4r/v2/jiraServiceMappingRegistry.rb",
     "lib/jiraService.rb",
     "lib/jiraServiceMappingRegistry.rb",
+    "lib/svn_hook_tools.rb",
     "lib/svn_jira_hook.rb",
     "pre-commit.sample",
-    "test/test_helper.rb"
+    "svn-hook-tools.gemspec",
+    "test/config/svn_hooks.yml",
+    "test/test_helper.rb",
+    "test/test_jira.rb"
   ]
   s.homepage = %q{http://github.com/crazycode/svn-hook-tools}
   s.require_paths = ["lib"]
