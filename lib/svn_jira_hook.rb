@@ -12,8 +12,12 @@ class JiraHook
     @jira.login(user, pass)
   end
 
+  def self.init(config)
+    @@config = config
+  end
 
-  def self.check(keyprefix, argv, config = nil)
+
+  def self.check(keyprefix, argv)
     repo_path = argv[0]
     transaction = argv[1]
     svnlook = 'svnlook'
@@ -30,7 +34,7 @@ class JiraHook
       exit(1)
     end
 
-    check(commit_author, commit_log, keyprefix, config)
+    check(commit_author, commit_log, keyprefix, @@config)
   end
 
   def self.check_log(commit_author, commit_log, keyprefix, config = nil)
