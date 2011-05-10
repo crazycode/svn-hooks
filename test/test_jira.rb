@@ -29,7 +29,7 @@ class TestJira < Test::Unit::TestCase
 
 
   def test_check_jira
-    # JiraHook.check("tangliqun", "Message-99:hello", 'Message')
+    # JiraHook.check_log("tangliqun", "Message-99:hello", 'Message')
   end
 
 end
