@@ -12,12 +12,17 @@ class JiraHook
     @jira.login(user, pass)
   end
 
-  def self.init(config)
-    @@config = config
+  def self.init(config = nil)
+    if config
+      @@config = config
+    else
+      @@config = nil
+    end
   end
 
 
   def self.check(keyprefix, argv)
+    self.init(nil)
     repo_path = argv[0]
     transaction = argv[1]
     svnlook = 'svnlook'
