@@ -21,10 +21,10 @@ class JiraHook
   end
 
 
-  def self.check(keyprefix, argv)
-    self.init(nil)
-    repo_path = argv[0]
-    transaction = argv[1]
+  def self.check(keyprefix, repo_path, transaction, config = nil)
+    #self.init(nil)
+    #repo_path = argv[0]
+    #transaction = argv[1]
     svnlook = 'svnlook'
 
     #commit_dirs_changed = `#{svnlook} dirs-changed #{repo_path} -t #{transaction}`
@@ -39,7 +39,7 @@ class JiraHook
       exit(1)
     end
 
-    check(commit_author, commit_log, keyprefix, @@config)
+    check(commit_author, commit_log, keyprefix, config)
   end
 
   def self.check_log(commit_author, commit_log, keyprefix, config = nil)
