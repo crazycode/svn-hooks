@@ -10,7 +10,7 @@ begin
     gem.summary = %Q{svn jira hook lib.}
     gem.description = %Q{svn jira hook ruby lib.}
     gem.email = "crazycode@gmail.com"
-    gem.homepage = "http://github.com/crazycode/svn-hook-tools"
+    gem.homepage = "http://github.com/crazycode/svn-hooks"
     gem.authors = ["crazycode"]
 
     gem.add_dependency "soap4r"
