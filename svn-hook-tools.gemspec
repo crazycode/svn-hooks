@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{svn-hook-tools}
-  s.version = "0.5.2"
+  s.name = "svn-hook-tools"
+  s.version = "0.5.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["crazycode"]
-  s.date = %q{2011-05-09}
-  s.description = %q{svn jira hook ruby lib.}
-  s.email = %q{crazycode@gmail.com}
+  s.date = "2012-01-04"
+  s.description = "svn jira hook ruby lib."
+  s.email = "crazycode@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE",
     "README"
@@ -36,22 +36,21 @@ Gem::Specification.new do |s|
     "test/test_helper.rb",
     "test/test_jira.rb"
   ]
-  s.homepage = %q{http://github.com/crazycode/svn-hook-tools}
+  s.homepage = "http://github.com/crazycode/svn-hooks"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
-  s.summary = %q{svn jira hook lib.}
+  s.rubygems_version = "1.8.10"
+  s.summary = "svn jira hook lib."
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<soap4r>, [">= 0"])
+      s.add_runtime_dependency(%q<soap4r-ruby1.9>, ["~> 2.0.3"])
     else
-      s.add_dependency(%q<soap4r>, [">= 0"])
+      s.add_dependency(%q<soap4r-ruby1.9>, ["~> 2.0.3"])
     end
   else
-    s.add_dependency(%q<soap4r>, [">= 0"])
+    s.add_dependency(%q<soap4r-ruby1.9>, ["~> 2.0.3"])
   end
 end
 
