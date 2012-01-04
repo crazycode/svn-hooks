@@ -14,7 +14,7 @@ begin
     gem.authors = ["crazycode"]
 
     # gem.add_dependency "soap4r"
-    gem.add_dependency "soap4r-ruby1.9", "~> 2.0.3"
+    gem.add_dependency "rubyjedi-soap4r", "~> 1.5.8.20100619003610"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
