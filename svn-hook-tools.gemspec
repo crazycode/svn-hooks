@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "svn-hook-tools"
-  s.version = "0.5.7"
+  s.version = "0.5.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["crazycode"]
@@ -45,12 +45,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<soap4r-ruby1.9>, ["~> 2.0.3"])
+      s.add_runtime_dependency(%q<rubyjedi-soap4r>, ["~> 1.5.8.20100619003610"])
     else
-      s.add_dependency(%q<soap4r-ruby1.9>, ["~> 2.0.3"])
+      s.add_dependency(%q<rubyjedi-soap4r>, ["~> 1.5.8.20100619003610"])
     end
   else
-    s.add_dependency(%q<soap4r-ruby1.9>, ["~> 2.0.3"])
+    s.add_dependency(%q<rubyjedi-soap4r>, ["~> 1.5.8.20100619003610"])
   end
 end
 
