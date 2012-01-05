@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "svn-hook-tools"
-  s.version = "0.5.8"
+  s.version = "0.5.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["crazycode"]
-  s.date = "2012-01-04"
+  s.date = "2012-01-05"
   s.description = "svn jira hook ruby lib."
   s.email = "crazycode@gmail.com"
   s.extra_rdoc_files = [
@@ -45,12 +45,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rubyjedi-soap4r>, ["~> 1.5.8.20100619003610"])
+      s.add_runtime_dependency(%q<soap4r-ruby1.9>, [">= 0"])
     else
-      s.add_dependency(%q<rubyjedi-soap4r>, ["~> 1.5.8.20100619003610"])
+      s.add_dependency(%q<soap4r-ruby1.9>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rubyjedi-soap4r>, ["~> 1.5.8.20100619003610"])
+    s.add_dependency(%q<soap4r-ruby1.9>, [">= 0"])
   end
 end
 
