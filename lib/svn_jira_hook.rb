@@ -4,14 +4,6 @@ require "yaml"
 
 class JiraHook
 
-  def initialize(base_url = nil)
-    @jira = ::Jira4R::JiraTool.new(2, base_url) unless base_url.nil?
-  end
-
-  def login(user, pass)
-    @jira.login(user, pass)
-  end
-
   def self.init(config = nil)
     if config
       @@config = config
@@ -20,9 +12,17 @@ class JiraHook
     end
   end
 
+  def self.configuration
+    if defined?(SVN_HOOKS_CONFIG_PATH)
+      config_file = SVN_HOOKS_CONFIG_PATH
+    else
+      config_file = '/etc/svn_hooks.yml'
+    end
+
+    YAML::load(IO.read(config_file))
+  end
 
   def self.check(keyprefix, argv, config = nil)
-    #self.init(nil)
     repo_path = argv[0]
     transaction = argv[1]
     svnlook = 'svnlook'
@@ -42,6 +42,8 @@ class JiraHook
     check_log(commit_author, commit_log, keyprefix, config)
   end
 
+  private
+
   def self.check_log(commit_author, commit_log, keyprefix, config = nil)
     if config
       jira_configuration = config
@@ -50,14 +52,24 @@ class JiraHook
       jira_configuration = configuration()
     end
 
-    jira = JiraHook.new(jira_configuration['jira_url'])
-    jira.login(jira_configuration['jira_username'], jira_configuration['jira_password'])
+    @jira = JiraProxy.new(jira_configuration['jira_url'])
+    @jira.login(jira_configuration['jira_username'], jira_configuration['jira_password'])
 
-    unless jira.check_right(commit_author, keyprefix, commit_log)
+    unless @jira.check_right(commit_author, keyprefix, commit_log)
       STDERR.puts("Doesn't exist as a issue on Jira!\n： #{keyprefix}-10: 修改说明")
       exit(1)
     end
+  end
 
+end
+
+class JiraProxy
+  def initialize(base_url = nil)
+    @jira = ::Jira4R::JiraTool.new(2, base_url) unless base_url.nil?
+  end
+
+  def login(user, pass)
+    @jira.login(user, pass)
   end
 
   # check the message is match the issue_key_regex
@@ -99,16 +111,4 @@ class JiraHook
     end
   end
 
-  def self.configuration
-    if defined?(SVN_HOOKS_CONFIG_PATH)
-      config_file = SVN_HOOKS_CONFIG_PATH
-    else
-      config_file = '/etc/svn_hooks.yml'
-    end
-
-    YAML::load(IO.read(config_file))
-  end
-
 end
-
-

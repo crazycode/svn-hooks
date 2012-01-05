@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/test_helper'
 
 SVN_HOOKS_CONFIG_PATH = File.dirname(__FILE__) + '/config/svn_hooks.yml'
 
@@ -30,6 +30,9 @@ class TestJira < Test::Unit::TestCase
 
   def test_check_jira
     # JiraHook.check_log("tangliqun", "Message-99:hello", 'Message')
+    jira = JiraHook.new('http://dev.uhuila.cn/jira')
+    jira.login('daemon', '1qaz@WSX#EDC')
+
   end
 
 end
